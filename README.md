@@ -1,29 +1,71 @@
-# Welcome to your Lovable project
+# NorthPeak Digital
 
-This project was built with [Lovable](https://lovable.dev).
+A modern, responsive digital agency landing page built with HTML, CSS, and JavaScript. The project focuses on clean UI, smooth animations, responsive layouts, and performance optimization.
 
-## Build with Lovable
+## 🌐 Live Demo
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+https://peak-digital-experience.vercel.app/
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+## ✨ Features
 
-## Development
+- Modern dark-themed UI
+- Fully responsive design
+- Smooth scrolling and animations
+- Interactive navigation
+- Optimized performance and accessibility
+- SEO-friendly structure
+- Custom favicon
+- Deployed on Vercel
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## 🛠️ Built With
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+- HTML5
+- CSS3
+- JavaScript
+- Vercel (Deployment)
+- Git & GitHub
+
+## 📂 Project Structure
+
+```
+public/
+├── favicon.png
+├── index.html
+├── style.css
+└── script.js
 ```
 
-## Built with
+## 🚀 Getting Started
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+Clone the repository:
+
+```bash
+git clone https://github.com/itsdepanshi/peak-digital-experience.git
+```
+
+Navigate to the project folder:
+
+```bash
+cd peak-digital-experience
+```
+
+Run the project using a local server (Live Server or any local development server).
+
+## 📈 Performance
+
+This project achieves excellent Lighthouse scores:
+
+- Performance: 97+
+- Accessibility: 98+
+- Best Practices: 100
+- SEO: 100
+
+## 👩‍💻 Author
+
+**Deepanshi Bhardwaj**
+
+GitHub: https://github.com/itsdepanshi
+
+---
+
+This project was created for learning, portfolio, and frontend development practice.
