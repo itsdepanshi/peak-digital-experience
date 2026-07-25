@@ -1,24 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "NorthPeak Digital — Premium Digital Agency" },
+      { name: "description", content: "NorthPeak Digital is a premium agency crafting web, brand, and AI-driven growth experiences for ambitious companies." },
+      { property: "og:title", content: "NorthPeak Digital — Premium Digital Agency" },
+      { property: "og:description", content: "Web, design, branding, SEO, marketing and AI automation for ambitious brands." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  useEffect(() => {
+    window.location.replace("/site/index.html");
+  }, []);
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div style={{ minHeight: "100vh", display: "grid", placeItems: "center", background: "#070912", color: "#e7ebf5", fontFamily: "system-ui" }}>
+      <p>Loading NorthPeak Digital…</p>
     </div>
   );
 }
