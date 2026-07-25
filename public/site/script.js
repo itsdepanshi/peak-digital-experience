@@ -91,13 +91,12 @@ function initNav() {
 }
 
 function initReveal() {
-  const els = document.querySelectorAll(".reveal, .card, .stat");
-  els.forEach(e => e.classList.add("reveal"));
+  const els = document.querySelectorAll(".reveal, .stagger");
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.14, rootMargin: "0px 0px -40px 0px" });
   els.forEach(e => io.observe(e));
 }
 
@@ -146,32 +145,50 @@ function initForm() {
     message: (v) => v.trim().length >= 10 || "Message should be at least 10 characters.",
   };
 
-  const setError = (name, msg) => {
+  const setError = (name, msg, value) => {
     const field = form.querySelector(`[name="${name}"]`).closest(".field");
     const err = form.querySelector(`.err[data-for="${name}"]`);
-    if (msg === true || !msg) { field.classList.remove("has-error"); err.textContent = ""; }
-    else { field.classList.add("has-error"); err.textContent = msg; }
+    if (msg === true || !msg) {
+      field.classList.remove("has-error");
+      if (err) err.textContent = "";
+      if (value && value.trim()) field.classList.add("is-valid");
+      else field.classList.remove("is-valid");
+    } else {
+      field.classList.add("has-error");
+      field.classList.remove("is-valid");
+      if (err) err.textContent = msg;
+    }
   };
 
   form.querySelectorAll("input, textarea").forEach(input => {
     input.addEventListener("blur", () => {
       const res = validators[input.name](input.value);
-      setError(input.name, res);
+      setError(input.name, res, input.value);
+    });
+    input.addEventListener("input", () => {
+      // Clear errors as user types
+      const field = input.closest(".field");
+      if (field.classList.contains("has-error")) {
+        const res = validators[input.name](input.value);
+        if (res === true) setError(input.name, true, input.value);
+      }
     });
   });
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     let ok = true;
+    let firstBad = null;
     Object.keys(validators).forEach(name => {
       const input = form.querySelector(`[name="${name}"]`);
       const res = validators[name](input.value);
-      setError(name, res);
-      if (res !== true) ok = false;
+      setError(name, res, input.value);
+      if (res !== true) { ok = false; if (!firstBad) firstBad = input; }
     });
-    if (!ok) return;
+    if (!ok) { firstBad && firstBad.focus(); return; }
     success.hidden = false;
     form.reset();
+    form.querySelectorAll(".field").forEach(f => f.classList.remove("is-valid"));
     setTimeout(() => { success.hidden = true; }, 6000);
   });
 }
